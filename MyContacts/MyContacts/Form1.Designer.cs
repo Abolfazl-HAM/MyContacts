@@ -113,6 +113,7 @@
             this.btnRefresh.Size = new System.Drawing.Size(64, 23);
             this.btnRefresh.Text = "بروز رسانی";
             this.btnRefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
             // btnAdd
             // 
@@ -124,6 +125,7 @@
             this.btnAdd.Size = new System.Drawing.Size(113, 23);
             this.btnAdd.Text = "افزودن شخص جدید";
             this.btnAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // CID
             // 

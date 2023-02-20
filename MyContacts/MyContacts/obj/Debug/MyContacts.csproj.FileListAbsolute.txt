@@ -9,3 +9,4 @@ D:\Phonebook\MyContacts\MyContacts\obj\Debug\MyContacts.csproj.GenerateResource.
 D:\Phonebook\MyContacts\MyContacts\obj\Debug\MyContacts.csproj.CoreCompileInputs.cache
 D:\Phonebook\MyContacts\MyContacts\obj\Debug\MyContacts.exe
 D:\Phonebook\MyContacts\MyContacts\obj\Debug\MyContacts.pdb
+D:\Phonebook\MyContacts\MyContacts\obj\Debug\MyContacts.frmAddOrEdit.resources

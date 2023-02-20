@@ -18,7 +18,22 @@ namespace MyContacts.Services
 
         public bool Insert(string name, string family, string mobile, string email, int age, string address)
         {
-            throw new NotImplementedException();
+                SqlConnection connection = new SqlConnection(connectionString);
+
+                string query = "Insert Into MyNumbers (Name,Family,Mobile,Email,Age,Address) Value (@Name,@Family,@Mobile,@Email,@Age,@Address)";
+                SqlCommand command=new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@Name", name);
+                command.Parameters.AddWithValue("@Family", family);
+                command.Parameters.AddWithValue("@Mobile", mobile);
+                command.Parameters.AddWithValue("@Email", email);
+                command.Parameters.AddWithValue("@Age", age);
+                command.Parameters.AddWithValue("@Address", address);
+                connection.Open();
+                command.ExecuteNonQuery();
+                connection.Close();
+                return true;
+            
+            
         }
 
         public DataTable SelectAll()

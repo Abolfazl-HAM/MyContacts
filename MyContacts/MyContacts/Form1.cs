@@ -22,9 +22,29 @@ namespace MyContacts
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            BindGrid();
+        }
+
+        private void BindGrid()
+        {
             dgContacts.AutoGenerateColumns = false;
             dgContacts.DataSource = null;
-            dgContacts.DataSource= Repository.SelectAll();
+            dgContacts.DataSource = Repository.SelectAll();
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            BindGrid();
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            frmAddOrEdit frmAddOrEdit = new frmAddOrEdit();
+            frmAddOrEdit.ShowDialog();
+            if (frmAddOrEdit.DialogResult == DialogResult.OK)
+            {
+                BindGrid();
+            }
         }
     }
 }
