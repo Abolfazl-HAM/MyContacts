@@ -1,0 +1,11 @@
+D:\Phonebook\MyContacts\MyContacts\bin\Debug\MyContacts.exe.config
+D:\Phonebook\MyContacts\MyContacts\bin\Debug\MyContacts.exe
+D:\Phonebook\MyContacts\MyContacts\bin\Debug\MyContacts.pdb
+D:\Phonebook\MyContacts\MyContacts\obj\Debug\MyContacts.csproj.AssemblyReference.cache
+D:\Phonebook\MyContacts\MyContacts\obj\Debug\MyContacts.csproj.SuggestedBindingRedirects.cache
+D:\Phonebook\MyContacts\MyContacts\obj\Debug\MyContacts.Form1.resources
+D:\Phonebook\MyContacts\MyContacts\obj\Debug\MyContacts.Properties.Resources.resources
+D:\Phonebook\MyContacts\MyContacts\obj\Debug\MyContacts.csproj.GenerateResource.cache
+D:\Phonebook\MyContacts\MyContacts\obj\Debug\MyContacts.csproj.CoreCompileInputs.cache
+D:\Phonebook\MyContacts\MyContacts\obj\Debug\MyContacts.exe
+D:\Phonebook\MyContacts\MyContacts\obj\Debug\MyContacts.pdb
