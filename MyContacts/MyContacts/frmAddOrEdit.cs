@@ -14,6 +14,7 @@ namespace MyContacts
     public partial class frmAddOrEdit : Form
     {
         IContactsRepository Repository;
+        public int cId = 0;
         public frmAddOrEdit()
         {
             InitializeComponent();
@@ -54,7 +55,16 @@ namespace MyContacts
         {
             if (ValidateInputs())
             {
-                bool isSuccess = Repository.Insert(txtName.Text, txtFamily.Text, txtMobile.Text, txtEmail.Text, (int)txtAge.Value, txtAddress.Text);
+                bool isSuccess;
+
+                if (cId == 0)
+                {
+                    isSuccess= Repository.Insert(txtName.Text, txtFamily.Text, txtMobile.Text, txtEmail.Text, (int)txtAge.Value, txtAddress.Text);
+                }
+                else
+                {
+                   isSuccess= Repository.Update(cId, txtName.Text, txtFamily.Text, txtMobile.Text, txtEmail.Text, (int)txtAge.Value, txtAddress.Text);
+                }
                 if(isSuccess== true)
                 {
                     MessageBox.Show("عملیات با موفقیت انجام شد", "موفقیت", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -69,7 +79,22 @@ namespace MyContacts
 
         private void frmAddOrEdit_Load(object sender, EventArgs e)
         {
-            this.Text = "افزودن شخص جدید";
+            if (cId == 0)
+            {
+                this.Text = "افزودن شخص جدید";
+            }
+            else
+            {
+                this.Text = "ویرایش شخص";
+                DataTable dt = Repository.SelectRow(cId);
+                txtName.Text = dt.Rows[0][1].ToString();
+                txtFamily.Text = dt.Rows[0][2].ToString();
+                txtAge.Value = int.Parse( dt.Rows[0][3].ToString());
+                txtMobile.Text = dt.Rows[0][4].ToString();
+                txtEmail.Text = dt.Rows[0][5].ToString();
+                txtAddress.Text = dt.Rows[0][6].ToString();
+                btnRegister.Text = "ویرایش";
+            }
         }
     }
 }

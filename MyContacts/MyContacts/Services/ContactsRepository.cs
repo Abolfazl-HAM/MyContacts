@@ -11,27 +11,7 @@ namespace MyContacts.Services
     public class ContactsRepository : IContactsRepository
     {
         private string connectionString = "Data Source=.; Initial Catalog=Phonebook; Integrated Security=true";
-        public bool Delete(int cId)
-        {
-            SqlConnection connection=new SqlConnection(connectionString);
-            try
-            {
-                string query = "Delete From MyNumbers where CID=@ID";
-                SqlCommand command = new SqlCommand(query,connection);
-                command.Parameters.AddWithValue("ID", cId);
-                connection.Open();
-                command.ExecuteNonQuery();
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-            finally
-            {
-                connection.Close();
-            }
-        }
+       
 
         public bool Insert(string name, string family, string mobile, string email, int age, string address)
         {
@@ -66,6 +46,56 @@ namespace MyContacts.Services
             
         }
 
+        public bool Update(int cId, string name, string family, string mobile, string email, int age, string address)
+        {
+            SqlConnection connection = new SqlConnection(connectionString);
+            try
+            {
+                string query = "Update MyNumbers set Name=@name,Family=@family,Mobile=@mobile,Email=@email,Age=@age,Address=@address where CID=@cId";
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@cId", cId);
+                command.Parameters.AddWithValue("@name", name);
+                command.Parameters.AddWithValue("@family", family);
+                command.Parameters.AddWithValue("@mobile", mobile);
+                command.Parameters.AddWithValue("@email", email);
+                command.Parameters.AddWithValue("@age", age);
+                command.Parameters.AddWithValue("@address", address);
+                connection.Open();
+                command.ExecuteNonQuery();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+        public bool Delete(int cId)
+        {
+            SqlConnection connection = new SqlConnection(connectionString);
+            try
+            {
+                string query = "Delete From MyNumbers where CID=@ID";
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("ID", cId);
+                connection.Open();
+                command.ExecuteNonQuery();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
         public DataTable SelectAll()
         {
             string query = "Select * From MyNumbers";
@@ -78,12 +108,14 @@ namespace MyContacts.Services
 
         public DataTable SelectRow(int cID)
         {
-            throw new NotImplementedException();
+            string query = "Select * From MyNumbers where CID="+cID;
+            SqlConnection connection = new SqlConnection(connectionString);
+            SqlDataAdapter adapter = new SqlDataAdapter(query, connection);
+            DataTable data = new DataTable();
+            adapter.Fill(data);
+            return data;
         }
 
-        public bool Update(int cId, string name, string family, string mobile, string email, int age, string address)
-        {
-            throw new NotImplementedException();
-        }
+       
     }
 }

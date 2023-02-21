@@ -66,5 +66,19 @@ namespace MyContacts
                 MessageBox.Show("لطفا یک نفر را از لیست انتخاب کنید");
             }
         }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            if(dgContacts.CurrentRow != null)
+            {
+                int cId = int.Parse(dgContacts.CurrentRow.Cells[0].Value.ToString());
+                frmAddOrEdit frm = new frmAddOrEdit();
+                frm.cId = cId;
+                if (frm.ShowDialog() == DialogResult.OK)
+                {
+                    BindGrid();
+                }
+            }
+        }
     }
 }
