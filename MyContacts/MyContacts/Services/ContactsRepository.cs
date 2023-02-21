@@ -116,6 +116,16 @@ namespace MyContacts.Services
             return data;
         }
 
-       
+        public DataTable Search(string parameter)
+        {
+            string query = "Select * From MyNumbers where Name like @parameter or Family like @parameter";
+            SqlConnection connection = new SqlConnection(connectionString);
+            SqlDataAdapter adapter = new SqlDataAdapter(query, connection);
+            adapter.SelectCommand.Parameters.AddWithValue("@parameter", "%" + parameter + "%");
+
+            DataTable data = new DataTable();
+            adapter.Fill(data);
+            return data;
+        }
     }
 }
