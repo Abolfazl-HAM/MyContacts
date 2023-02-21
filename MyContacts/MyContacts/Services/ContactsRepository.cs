@@ -13,15 +13,35 @@ namespace MyContacts.Services
         private string connectionString = "Data Source=.; Initial Catalog=Phonebook; Integrated Security=true";
         public bool Delete(int cId)
         {
-            throw new NotImplementedException();
+            SqlConnection connection=new SqlConnection(connectionString);
+            try
+            {
+                string query = "Delete From MyNumbers where CID=@ID";
+                SqlCommand command = new SqlCommand(query,connection);
+                command.Parameters.AddWithValue("ID", cId);
+                connection.Open();
+                command.ExecuteNonQuery();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+            finally
+            {
+                connection.Close();
+            }
         }
 
         public bool Insert(string name, string family, string mobile, string email, int age, string address)
         {
-                SqlConnection connection = new SqlConnection(connectionString);
+               SqlConnection connection = new SqlConnection(connectionString);
 
-                string query = "Insert Into MyNumbers (Name,Family,Mobile,Email,Age,Address) Value (@Name,@Family,@Mobile,@Email,@Age,@Address)";
-                SqlCommand command=new SqlCommand(query, connection);
+               
+            try 
+            {
+                string query = "Insert Into MyNumbers (Name,Family,Mobile,Email,Age,Address) Values (@Name,@Family,@Mobile,@Email,@Age,@Address)";
+                SqlCommand command = new SqlCommand(query, connection);
                 command.Parameters.AddWithValue("@Name", name);
                 command.Parameters.AddWithValue("@Family", family);
                 command.Parameters.AddWithValue("@Mobile", mobile);
@@ -30,8 +50,18 @@ namespace MyContacts.Services
                 command.Parameters.AddWithValue("@Address", address);
                 connection.Open();
                 command.ExecuteNonQuery();
-                connection.Close();
+                
                 return true;
+            }
+            catch
+            {
+                return false;
+            }
+            finally
+            {
+                connection.Close();
+            }
+               
             
             
         }

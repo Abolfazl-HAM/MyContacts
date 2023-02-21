@@ -66,5 +66,10 @@ namespace MyContacts
                 }
             }
         }
+
+        private void frmAddOrEdit_Load(object sender, EventArgs e)
+        {
+            this.Text = "افزودن شخص جدید";
+        }
     }
 }
