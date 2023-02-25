@@ -10,3 +10,8 @@ D:\Phonebook\MyContacts\MyContacts\obj\Debug\MyContacts.csproj.CoreCompileInputs
 D:\Phonebook\MyContacts\MyContacts\obj\Debug\MyContacts.exe
 D:\Phonebook\MyContacts\MyContacts\obj\Debug\MyContacts.pdb
 D:\Phonebook\MyContacts\MyContacts\obj\Debug\MyContacts.frmAddOrEdit.resources
+D:\Phonebook\MyContacts\MyContacts\bin\Debug\EntityFramework.dll
+D:\Phonebook\MyContacts\MyContacts\bin\Debug\EntityFramework.SqlServer.dll
+D:\Phonebook\MyContacts\MyContacts\bin\Debug\EntityFramework.xml
+D:\Phonebook\MyContacts\MyContacts\bin\Debug\EntityFramework.SqlServer.xml
+D:\Phonebook\MyContacts\MyContacts\obj\Debug\MyContacts.csproj.CopyComplete

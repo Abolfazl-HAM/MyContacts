@@ -89,6 +89,7 @@
             this.toolStrip1.Size = new System.Drawing.Size(784, 26);
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
+          
             // 
             // btnAdd
             // 

@@ -1,4 +1,4 @@
-﻿using MyContacts.Services;
+﻿
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,12 +13,12 @@ namespace MyContacts
 {
     public partial class frmAddOrEdit : Form
     {
-        IContactsRepository Repository;
+        PhonebookEntities db = new PhonebookEntities();
         public int cId = 0;
         public frmAddOrEdit()
         {
             InitializeComponent();
-            Repository = new ContactsRepository();
+            
         }
         bool ValidateInputs()
         {
@@ -55,25 +55,38 @@ namespace MyContacts
         {
             if (ValidateInputs())
             {
-                bool isSuccess;
+                
 
                 if (cId == 0)
                 {
-                    isSuccess= Repository.Insert(txtName.Text, txtFamily.Text, txtMobile.Text, txtEmail.Text, (int)txtAge.Value, txtAddress.Text);
+                    MyNumber contact = new MyNumber();
+                    contact.Name = txtName.Text;
+                    contact.Family = txtFamily.Text;
+                    contact.Mobile = txtMobile.Text;
+                    contact.Age =(int)txtAge.Value;
+                    contact.Email = txtEmail.Text;
+                    contact.Address = txtAddress.Text;
+                    db.MyNumbers.Add(contact);
                 }
                 else
                 {
-                   isSuccess= Repository.Update(cId, txtName.Text, txtFamily.Text, txtMobile.Text, txtEmail.Text, (int)txtAge.Value, txtAddress.Text);
+                    var contact = db.MyNumbers.Find(cId);
+                    contact.Name = txtName.Text;
+                    contact.Family = txtFamily.Text;
+                    contact.Mobile = txtMobile.Text;
+                    contact.Age = (int)txtAge.Value;
+                    contact.Email = txtEmail.Text;
+                    contact.Address = txtAddress.Text;
+                    
                 }
-                if(isSuccess== true)
-                {
+                db.SaveChanges();
+                
+                
                     MessageBox.Show("عملیات با موفقیت انجام شد", "موفقیت", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     DialogResult = DialogResult.OK;
-                }
-                else
-                {
-                    MessageBox.Show("عملیات با شکست مواجه شد", "خطا", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                
+               
+                
             }
         }
 
@@ -86,13 +99,13 @@ namespace MyContacts
             else
             {
                 this.Text = "ویرایش شخص";
-                DataTable dt = Repository.SelectRow(cId);
-                txtName.Text = dt.Rows[0][1].ToString();
-                txtFamily.Text = dt.Rows[0][2].ToString();
-                txtAge.Value = int.Parse( dt.Rows[0][3].ToString());
-                txtMobile.Text = dt.Rows[0][4].ToString();
-                txtEmail.Text = dt.Rows[0][5].ToString();
-                txtAddress.Text = dt.Rows[0][6].ToString();
+                MyNumber contact=db.MyNumbers.Find(cId);
+                txtName.Text = contact.Name;
+                txtFamily.Text = contact.Family;
+                txtAge.Value = (int)contact.Age;
+                txtMobile.Text = contact.Mobile;
+                txtEmail.Text = contact.Email;
+                txtAddress.Text = contact.Address;
                 btnRegister.Text = "ویرایش";
             }
         }

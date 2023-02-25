@@ -1,4 +1,4 @@
-﻿using MyContacts.Services;
+﻿
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,11 +13,11 @@ namespace MyContacts
 {
     public partial class Form1 : Form
     {
-        IContactsRepository Repository;
+        
         public Form1()
         {
             InitializeComponent();
-            Repository = new ContactsRepository();
+           
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -27,9 +27,13 @@ namespace MyContacts
 
         private void BindGrid()
         {
-            dgContacts.AutoGenerateColumns = false;
-            dgContacts.DataSource = null;
-            dgContacts.DataSource = Repository.SelectAll();
+            using(PhonebookEntities db = new PhonebookEntities())
+            {
+                dgContacts.AutoGenerateColumns = false;
+                dgContacts.DataSource = null;
+                dgContacts.DataSource = db.MyNumbers.ToList();
+            }
+            
         }
 
         private void btnRefresh_Click(object sender, EventArgs e)
@@ -57,7 +61,14 @@ namespace MyContacts
                 if (MessageBox.Show($"  آیا از حذف {FullName} مطمئن هستید ","توجه",MessageBoxButtons.YesNo,MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     int Id = int.Parse(dgContacts.CurrentRow.Cells[0].Value.ToString());
-                    Repository.Delete(Id);
+                    using (PhonebookEntities db = new PhonebookEntities())
+                    {
+                        var contact = db.MyNumbers.Single(n=> n.CID==Id);
+                        db.MyNumbers.Remove(contact);
+                        db.SaveChanges();
+                       
+                        
+                    }
                     BindGrid();
                 }
             }
@@ -83,7 +94,13 @@ namespace MyContacts
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
-            dgContacts.DataSource = Repository.Search(txtSearch.Text);
+            using (PhonebookEntities db = new PhonebookEntities())
+            {
+                dgContacts.DataSource=db.MyNumbers.Where(n=> n.Name.Contains(txtSearch.Text)|| n.Family.Contains(txtSearch.Text)).ToList();
+            }
+           
         }
+
+        
     }
 }
